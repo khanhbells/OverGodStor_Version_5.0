@@ -1,5 +1,7 @@
 <?php if (isset($data) && $data != null) { ?>
-    <a href="?mod=hoadon&act=xetduyet&id=<?= $data[0]['MaHD'] ?>" class="btn btn-success">Duyệt hóa đơn</a>
+    <?php if (isset($data[0]['TrangThai']) && $data[0]['TrangThai'] != 1) { ?>
+        <a href="?mod=hoadon&act=xetduyet&id=<?= $data[0]['MaHD'] ?>" class="btn btn-success">Duyệt hóa đơn</a>
+    <?php } ?>
     <a href="?mod=hoadon&act=delete&id=<?= $data[0]['MaHD'] ?>" onclick="return confirm('Bạn có thật sự muốn xóa ?');" class="btn btn-danger">Xóa</a>
 <?php } ?>
 

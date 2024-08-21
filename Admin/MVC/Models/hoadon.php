@@ -15,7 +15,10 @@ class Hoadon extends Model
 
     function chitiethoadon($id)
     {
-        $query = "SELECT ct.*, s.TenSP as Ten FROM chitiethoadon as ct, sanpham as s WHERE ct.MaSP = s.MaSP AND ct.MaHD = $id";
+        $query = "SELECT ct.*, s.TenSP as Ten, hd.TrangThai FROM chitiethoadon as ct 
+              JOIN sanpham as s ON ct.MaSP = s.MaSP 
+              JOIN hoadon as hd ON ct.MaHD = hd.MaHD 
+              WHERE ct.MaHD = $id";
         require("result.php");
         return $data;
     }
@@ -31,5 +34,12 @@ class Hoadon extends Model
             $query_update = "UPDATE sanpham SET SoLuong = SoLuong - $SoLuong WHERE MaSP = $MaSP";
             $this->conn->query($query_update);
         }
+    }
+    function update($data)
+    {
+        $MaHD = $data['MaHD'];
+        $TrangThai = $data['TrangThai'];
+        $query = "UPDATE HoaDon SET TrangThai = $TrangThai WHERE MaHD = $MaHD";
+        $this->conn->query($query);
     }
 }
